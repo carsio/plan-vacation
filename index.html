@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Planejador de Férias</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Planejador de férias</p>
+      <h1>Veja datas possíveis seguindo as restrições de férias</h1>
+      <p class="subtitle">
+        Considere início entre segunda e quarta (ou 2 dias antes de feriado),
+        períodos mínimos de 14 e 5 dias, e evite saídas concomitantes no mesmo papel.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls" aria-label="Controles do planejamento">
+      <div class="control-group">
+        <label for="year">Ano</label>
+        <select id="year"></select>
+      </div>
+      <div class="control-group">
+        <label for="region">Região</label>
+        <select id="region">
+          <option value="national">Somente feriados nacionais</option>
+          <option value="SP">São Paulo (SP)</option>
+          <option value="RJ">Rio de Janeiro (RJ)</option>
+          <option value="MG">Minas Gerais (MG)</option>
+          <option value="RS">Rio Grande do Sul (RS)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="role">Papel da equipe</label>
+        <select id="role">
+          <option value="dev">Desenvolvedor</option>
+          <option value="design">Designer</option>
+          <option value="product">Produto</option>
+        </select>
+      </div>
+      <div class="control-group period-group">
+        <label>Períodos (até 3)</label>
+        <div class="period-inputs">
+          <input type="number" min="5" max="60" value="14" aria-label="Período 1" />
+          <input type="number" min="5" max="60" value="7" aria-label="Período 2" />
+          <input type="number" min="5" max="60" value="5" aria-label="Período 3" />
+        </div>
+        <p class="helper">Um período deve ter pelo menos 14 dias, os demais no mínimo 5.</p>
+      </div>
+      <button id="update">Atualizar calendário</button>
+    </section>
+
+    <section class="status" aria-live="polite">
+      <div id="validation" class="validation"></div>
+      <div class="legend">
+        <div><span class="legend-dot length-0"></span> Início possível (período 1)</div>
+        <div><span class="legend-dot length-1"></span> Início possível (período 2)</div>
+        <div><span class="legend-dot length-2"></span> Início possível (período 3)</div>
+        <div><span class="legend-dot holiday"></span> Feriado</div>
+        <div><span class="legend-dot blocked"></span> Conflito com colega do mesmo papel</div>
+      </div>
+    </section>
+
+    <section>
+      <div id="calendar" class="calendar"></div>
+    </section>
+
+    <section class="holiday-list" aria-label="Lista de feriados">
+      <h2>Feriados exibidos</h2>
+      <ul id="holidayList"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Dados de feriados são indicativos. Confirme feriados municipais aplicáveis à sua cidade.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
